@@ -1,0 +1,33 @@
+export PYTHONPATH="`pwd`:$PYTHONPATH"
+
+experiment_name=offthegrid_DA3giant
+log_dir=./results/training_runs/
+num_epochs=200
+mixed_precision=bf16
+
+#Training Data
+training_datasets='DL3DV co3d London ARKit ScanNetplusplus Unreal re10k wildrgbd kitti360 DTU_train DTU_synthetic_train BlendedMVS harmonyos'
+source_min_range=1
+source_max_range=12
+images_per_gpu=12
+num_target=0
+sample_mode=linear_close
+loading_mode=no_crop
+load_size=518
+
+# Student model
+pretrained_ckpt=None
+encoder_model=depthanything3_giant
+detector_type=offthegrid
+num_gaussians_per_patch='16 32 64'
+shared_intrinsics=True
+
+# Teacher model
+teacher_mode=static
+ema_decay=0.999
+teacher_ckpt=/home/amoreau/vggt_checkpoints/original_vggt
+
+python train.py --training_datasets $training_datasets  --log_dir $log_dir/$experiment_name/ --sample_mode $sample_mode --image_min_range $source_min_range --image_max_range $source_max_range\
+ --num_target $num_target  --num_epochs $num_epochs --teacher_mode $teacher_mode --pretrained_ckpt $pretrained_ckpt --images_per_gpu $images_per_gpu --shared_intrinsics $shared_intrinsics \
+ --decoder_type $decoder_type --teacher_ckpt $teacher_ckpt --loading_mode $loading_mode --load_size $load_size --mixed_precision $mixed_precision --ema_decay $ema_decay --encoder_model $encoder_model \
+  --num_gaussians_per_patch $num_gaussians_per_patch

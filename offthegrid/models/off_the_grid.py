@@ -16,7 +16,6 @@ from offthegrid.utils.alignment_utils import get_camera_centers
 from fused_ssim import fused_ssim
 
 device = "cuda:0" if torch.cuda.is_available() else "cpu"
-dtype = torch.bfloat16 if torch.cuda.get_device_capability()[0] >= 8 else torch.float16
 
 class OffTheGrid(torch.nn.Module):
 
@@ -169,6 +168,27 @@ class OffTheGrid(torch.nn.Module):
             print('NO GAUSSIANS DECODER CHECKPOINTS, SKIP LOADING FOR THIS MODULE')
         print("Loading done.")
 
+    @classmethod
+    def from_pretrained(cls, path):
+        """Build the released checkpoint in the paper evaluation setting.
+
+        Layout:
+            path/3D_foundation_model.pth        # fine-tuned VGGT encoder
+            path/gaussian_decoder_weights.pth   # detection decoder
+        """
+        model = cls(encoder='vggt',
+                    decoder='offthegrid',
+                    geometry_mode='depth',
+                    num_gaussians_per_patch=[16, 32, 64],
+                    predict_conf=True,
+                    use_features=True,
+                    device='cpu')
+        model.encoder.load_state_dict(
+            torch.load(os.path.join(path, '3D_foundation_model.pth'), map_location='cpu', mmap=True))
+        model.gaussians_decoder.load_state_dict(
+            torch.load(os.path.join(path, 'gaussian_decoder_weights.pth'), map_location='cpu', mmap=True))
+        return model.eval()
+
     def save(self, ckpt_folder):
         if not self.encoder_freezed:
             encoder_ckpt = os.path.join(ckpt_folder,'3D_foundation_model.pth')
@@ -261,7 +281,9 @@ class OffTheGrid(torch.nn.Module):
     
     def render_image(self, gaussians_attributes, extrinsic, intrinsic, H, W, sources_views='all', conf_fusion=False,
                      add_safety_gaussian=False, target_view=None, batch_idx=0,render_depth_normal=True,
-                     confidence_visualization=False, bg_color=torch.tensor([0.,0.,0.]).cuda()):
+                     confidence_visualization=False, bg_color=None):
+        if bg_color is None:
+            bg_color = extrinsic.new_zeros(3)
         sources_gaussians = {}
         
         for att in gaussians_attributes:

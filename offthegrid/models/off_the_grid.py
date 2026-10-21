@@ -232,7 +232,9 @@ class OffTheGrid(torch.nn.Module):
             else:
                 self.gaussians_decoder.density_mode = self.test_density_mode#'adaptive_entropy_conf_image'
 
-        gaussians = self.gaussians_decoder(images, embeddings, depth_map, depth_conf, pointmap, point_conf, extrinsics, intrinsics)
+        with torch.autocast(images.device.type, enabled=False):
+            embeddings = [e.float() for e in embeddings]
+            gaussians = self.gaussians_decoder(images, embeddings, depth_map, depth_conf, pointmap, point_conf, extrinsics, intrinsics)
         
         
         if self.training_mode:

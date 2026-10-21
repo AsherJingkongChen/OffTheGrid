@@ -5,13 +5,13 @@ import torchvision
 import numpy as np
 import matplotlib.pyplot as plt
 import time
-from src.models.off_the_grid import OffTheGrid
-from src.utils.trajectory_utils import interpolate_extrinsics, generate_spiral_path
-from src.utils.os_utils import str2bool, tensor_to_mp4, save_camera_poses
-from src.utils.colmap_utils import export_to_colmap_txt
-from src.utils.gaussians_utils import SH2RGB
-from src.datasets.simple_inference_dataset import ImageFolderDataset
-from src.utils.trajectory_utils import generate_trajectory, render_trajectory
+from offthegrid.models.off_the_grid import OffTheGrid
+from offthegrid.utils.trajectory_utils import interpolate_extrinsics, generate_spiral_path
+from offthegrid.utils.os_utils import str2bool, tensor_to_mp4, save_camera_poses
+from offthegrid.utils.colmap_utils import export_to_colmap_txt
+from offthegrid.utils.gaussians_utils import SH2RGB
+from offthegrid.datasets.simple_inference_dataset import ImageFolderDataset
+from offthegrid.utils.trajectory_utils import generate_trajectory, render_trajectory
 
 device = "cuda:0" if torch.cuda.is_available() else "cpu"
 
@@ -123,7 +123,7 @@ if __name__ == "__main__":
         tensor_to_mp4(depth_tensor,os.path.join(args.output_dir, f'render_depth.mp4'),fps=20)
 
     if args.export_mesh:
-        from src.utils.mesh_utils import tsdf_fusion
+        from offthegrid.utils.mesh_utils import tsdf_fusion
         mesh_mode = 'pred'
         if mesh_mode == 'render':
             renders, depths, alphas = [], [], []

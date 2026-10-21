@@ -9,18 +9,18 @@ from tqdm import tqdm
 from accelerate import Accelerator
 from accelerate.utils import set_seed
 
-from src.models.off_the_grid import OffTheGrid
-from src.models.geometry_encoders.vggt_encoder import VGGT_Encoder
-from src.models.geometry_encoders.depthanything3_encoder import DepthAnything3_Encoder
-from src.datasets.multigpu_training_dataset import create_train_dataloader
-from src.datasets.vggt_data_loader import VGGTDataset
-from src.datasets.Charge_dataset import ChargeDataset, charge_collate_fn
-from src.datasets.scrream_dataset import SCRREAMDataset
+from offthegrid.models.off_the_grid import OffTheGrid
+from offthegrid.models.geometry_encoders.vggt_encoder import VGGT_Encoder
+from offthegrid.models.geometry_encoders.depthanything3_encoder import DepthAnything3_Encoder
+from offthegrid.datasets.multigpu_training_dataset import create_train_dataloader
+from offthegrid.datasets.vggt_data_loader import VGGTDataset
+from offthegrid.datasets.Charge_dataset import ChargeDataset, charge_collate_fn
+from offthegrid.datasets.scrream_dataset import SCRREAMDataset
 
-from src.utils.os_utils import str2bool
-from src.utils.loss_utils import geometry_consistency_loss, EMAHelper
-from src.utils.gaussians_utils import get_cosine_schedule_with_warmup
-from src.utils.eval_utils import visualize_depth
+from offthegrid.utils.os_utils import str2bool
+from offthegrid.utils.loss_utils import geometry_consistency_loss, EMAHelper
+from offthegrid.utils.gaussians_utils import get_cosine_schedule_with_warmup
+from offthegrid.utils.eval_utils import visualize_depth
 
 def validate(gaussian_model, accelerator, val_dataloader, iteration, tb_writer, best_psnr, args):
     gaussian_model.eval()

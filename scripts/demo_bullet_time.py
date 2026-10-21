@@ -4,10 +4,10 @@ import torch
 import torchvision
 import numpy as np
 import time
-from src.models.off_the_grid import OffTheGrid
-from src.utils.os_utils import str2bool, tensor_to_mp4
-from src.datasets.simple_inference_dataset import ImageFolderDataset
-from src.utils.trajectory_utils import generate_trajectory, render_trajectory
+from offthegrid.models.off_the_grid import OffTheGrid
+from offthegrid.utils.os_utils import str2bool, tensor_to_mp4
+from offthegrid.datasets.simple_inference_dataset import ImageFolderDataset
+from offthegrid.utils.trajectory_utils import generate_trajectory, render_trajectory
 device = "cuda:0" if torch.cuda.is_available() else "cpu"
 
 if __name__ == "__main__":

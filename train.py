@@ -10,18 +10,18 @@ from accelerate import Accelerator
 from accelerate.utils import set_seed
 from huggingface_hub import hf_hub_download
 
-from src.models.off_the_grid import OffTheGrid
-from src.models.geometry_encoders.vggt_encoder import VGGT_Encoder
-#from src.models.geometry_encoders.vggt_omega_encoder import VGGTOmega_Encoder
-from src.models.geometry_encoders.depthanything3_encoder import DepthAnything3_Encoder
-from src.datasets.multires_training_datasets import create_train_dataloader, InfiniteLoader
-from src.datasets.Charge_dataset import ChargeDataset, charge_collate_fn
-from src.datasets.scrream_dataset import SCRREAMDataset
-from src.datasets.minimal_dataset import MinimalDataset
-from src.utils.os_utils import str2bool
-from src.utils.loss_utils import geometry_consistency_loss, EMAHelper
-from src.utils.gaussians_utils import get_cosine_schedule_with_warmup
-from src.utils.eval_utils import visualize_depth
+from offthegrid.models.off_the_grid import OffTheGrid
+from offthegrid.models.geometry_encoders.vggt_encoder import VGGT_Encoder
+#from offthegrid.models.geometry_encoders.vggt_omega_encoder import VGGTOmega_Encoder
+from offthegrid.models.geometry_encoders.depthanything3_encoder import DepthAnything3_Encoder
+from offthegrid.datasets.multires_training_datasets import create_train_dataloader, InfiniteLoader
+from offthegrid.datasets.Charge_dataset import ChargeDataset, charge_collate_fn
+from offthegrid.datasets.scrream_dataset import SCRREAMDataset
+from offthegrid.datasets.minimal_dataset import MinimalDataset
+from offthegrid.utils.os_utils import str2bool
+from offthegrid.utils.loss_utils import geometry_consistency_loss, EMAHelper
+from offthegrid.utils.gaussians_utils import get_cosine_schedule_with_warmup
+from offthegrid.utils.eval_utils import visualize_depth
 
 def validate(gaussian_model, accelerator, val_dataloader, iteration, tb_writer, best_psnr, args):
     gaussian_model.eval()

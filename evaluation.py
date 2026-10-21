@@ -9,26 +9,26 @@ import cv2
 import pandas as pd
 import csv
 
-from src.models.off_the_grid import OffTheGrid
-from src.models.baselines import DA3GaussianModel
-from src.utils.geometry_utils import closed_form_inverse_se3, matrix_to_quaternion, quaternion_to_matrix
-from src.utils.metrics_utils import compute_rendering_metrics, evaluate_intrinsics
-from src.utils.os_utils import str2bool, tensor_to_mp4, save_camera_poses, save_depth_map
-from src.utils.eval_utils import cam_eval, depth_eval
-from src.utils.trajectory_utils import interpolate_extrinsics, generate_spiral_path
-from src.utils.alignment_utils import camera_pose_optimization_on_test_images
-from src.datasets.Charge_dataset import ChargeDataset
-from src.datasets.scrream_dataset import SCRREAMDataset
-from src.datasets.mipnerf360_dataset import MipNeRF360Dataset
-from src.datasets.tanks_and_temples_dataset import TanksAndTemplesDataset
-from src.datasets.DL3DV_benchmark_dataset import DL3DVBenchmarkDataset
-from src.datasets.sevenscenes_dataset import SevenScenesDataset
-from src.datasets.pixelsplat_datasets import PixelSplatDataset
-from src.datasets.realX3D_dataset import RealX3D_Dataset
-from src.datasets.robustnerf_dataset import RobustNerf_Dataset
-from src.datasets.nerfonthego_dataset import NerfOnTheGo_Dataset
-from src.datasets.phototourism_dataset import Phototourism_Dataset
-from src.datasets.minimal_dataset import MinimalDataset
+from offthegrid.models.off_the_grid import OffTheGrid
+from offthegrid.models.baselines import DA3GaussianModel
+from offthegrid.utils.geometry_utils import closed_form_inverse_se3, matrix_to_quaternion, quaternion_to_matrix
+from offthegrid.utils.metrics_utils import compute_rendering_metrics, evaluate_intrinsics
+from offthegrid.utils.os_utils import str2bool, tensor_to_mp4, save_camera_poses, save_depth_map
+from offthegrid.utils.eval_utils import cam_eval, depth_eval
+from offthegrid.utils.trajectory_utils import interpolate_extrinsics, generate_spiral_path
+from offthegrid.utils.alignment_utils import camera_pose_optimization_on_test_images
+from offthegrid.datasets.Charge_dataset import ChargeDataset
+from offthegrid.datasets.scrream_dataset import SCRREAMDataset
+from offthegrid.datasets.mipnerf360_dataset import MipNeRF360Dataset
+from offthegrid.datasets.tanks_and_temples_dataset import TanksAndTemplesDataset
+from offthegrid.datasets.DL3DV_benchmark_dataset import DL3DVBenchmarkDataset
+from offthegrid.datasets.sevenscenes_dataset import SevenScenesDataset
+from offthegrid.datasets.pixelsplat_datasets import PixelSplatDataset
+from offthegrid.datasets.realX3D_dataset import RealX3D_Dataset
+from offthegrid.datasets.robustnerf_dataset import RobustNerf_Dataset
+from offthegrid.datasets.nerfonthego_dataset import NerfOnTheGo_Dataset
+from offthegrid.datasets.phototourism_dataset import Phototourism_Dataset
+from offthegrid.datasets.minimal_dataset import MinimalDataset
 
 device = "cuda:0" if torch.cuda.is_available() else "cpu"
 dtype = torch.bfloat16 if torch.cuda.get_device_capability()[0] >= 8 else torch.float16

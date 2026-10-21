@@ -1,0 +1,31 @@
+[build-system]
+build-backend = "setuptools.build_meta"
+requires = ["setuptools>=61.0", "wheel"]
+
+[project]
+dependencies = [
+    "einops",
+    "fused-ssim",
+    "gsplat",
+    "huggingface-hub",
+    "jaxtyping",
+    "lpips",
+    "matplotlib",
+    "numpy",
+    "opencv-python",
+    "pillow",
+    "plyfile",
+    "roma",
+    "scikit-image",
+    "scipy",
+    "torch",
+    "torchvision",
+    "tqdm",
+]
+name = "offthegrid"
+requires-python = ">= 3.10"
+version = "0.0.1"
+
+[tool.setuptools.packages.find]
+include = ["offthegrid*"]
+where = ["."]

@@ -3,7 +3,7 @@ from vggt_omega.models import VGGTOmega
 from vggt_omega.utils.load_fn import load_and_preprocess_images
 from vggt_omega.utils.pose_enc import encoding_to_camera
 from offthegrid.utils.loss_utils import check_and_fix_inf_nan
-from vggt.vggt.utils.pose_enc import quat_to_mat
+from offthegrid.vggt.vggt.utils.pose_enc import quat_to_mat
 
 # Modify VGGT class to return latent tokens as well as geometry data
 class VGGTOmega_Encoder(VGGTOmega):

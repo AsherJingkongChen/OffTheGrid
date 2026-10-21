@@ -1,7 +1,7 @@
 import numpy as np
 import torch
 import torch.nn.functional as F
-from vggt.utils.geometry import closed_form_inverse_se3
+from offthegrid.vggt.utils.geometry import closed_form_inverse_se3
 from scipy.optimize import minimize
 from einops import rearrange
 import matplotlib.pyplot as plt

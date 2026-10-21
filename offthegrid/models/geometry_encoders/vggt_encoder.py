@@ -1,8 +1,8 @@
 import torch
 #from submodules.vggt.vggt.models.vggt import VGGT
 #from submodules.vggt.vggt.utils.pose_enc import quat_to_mat
-from vggt.models.vggt import VGGT
-from vggt.utils.pose_enc import quat_to_mat
+from offthegrid.vggt.models.vggt import VGGT
+from offthegrid.vggt.utils.pose_enc import quat_to_mat
 from offthegrid.utils.loss_utils import check_and_fix_inf_nan
 
 # Modify VGGT class to return latent tokens as well as geometry data

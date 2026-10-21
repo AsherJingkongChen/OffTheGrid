@@ -5,7 +5,7 @@ import json
 import numpy as np
 from torch.utils.data import Dataset
 from offthegrid.utils.load_utils import load_and_preprocess_images, indices_to_select
-from vggt.utils.pose_enc import pose_encoding_to_extri_intri
+from offthegrid.vggt.utils.pose_enc import pose_encoding_to_extri_intri
 
 from random import shuffle
 from tqdm import tqdm

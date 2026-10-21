@@ -4,7 +4,7 @@ import numpy as np
 from einops import rearrange
 from torchvision import transforms
 from offthegrid.utils.gaussians_utils import patchify, build_rotation, extract_rotation
-from vggt.heads.dpt_head import DPTHead
+from offthegrid.vggt.heads.dpt_head import DPTHead
 from offthegrid.utils.geometry_utils import closed_form_inverse_se3, pred_to_cam_coords
 from offthegrid.models.gaussians_decoders.layers import UNet, MLP
 
